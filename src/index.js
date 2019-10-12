@@ -7,14 +7,14 @@ export class Inventory {
     return this._inv;
   }
 
-  add(item) {
+  add(item, num = 1) {
     let alreadyExists = this._inv.find(inv => inv.name === item.name);
     if (alreadyExists === undefined) {
-      item.number = 1;
+      item.number = num;
       this._inv.push(item);
     } else {
       console.log(alreadyExists);
-      alreadyExists.number++;
+      alreadyExists.number += num;
     }
   }
 

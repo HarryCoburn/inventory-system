@@ -36,6 +36,21 @@ test('Existing item gets incremented when one more is added', () => {
   expect(numTest.number).toBe(2);
 });
 
+test('Existing item gets incremented when more than one is added', () => {
+  let testObj = new Inventory();
+  let testItem = {
+    name: 'test'
+  };
+  testObj.add(testItem);
+  testObj.add(testItem, 3);
+
+  let numTest = testObj.inv.find(item => {
+    return item.name === 'test';
+  });
+  console.log('Numtest', numTest);
+  expect(numTest.number).toBe(4);
+});
+
 test('Item can be dropped and decremented from inventory successfully.', () => {
   let testObj = new Inventory();
   let testItem = {
