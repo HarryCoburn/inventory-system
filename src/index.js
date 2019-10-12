@@ -18,12 +18,12 @@ export class Inventory {
     }
   }
 
-  drop(item) {
+  drop(item, num = 1) {
     let toBeDropped = this._inv.find(inv => inv.name === item);
-    if (toBeDropped.number === 1) {
+    if (toBeDropped.number <= num) {
       this._inv = this._inv.filter(inv => inv.name !== item);
     } else {
-      toBeDropped.number--;
+      toBeDropped.number -= num;
     }
   }
 }
