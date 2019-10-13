@@ -12,8 +12,8 @@ export class Inventory {
     if (alreadyExists === undefined) {
       item.number = num;
       this._inv.push(item);
+      this.sortInv();
     } else {
-      console.log(alreadyExists);
       alreadyExists.number += num;
     }
   }
@@ -22,8 +22,21 @@ export class Inventory {
     let toBeDropped = this._inv.find(inv => inv.name === item);
     if (toBeDropped.number <= num) {
       this._inv = this._inv.filter(inv => inv.name !== item);
+      this.sortInv();
     } else {
       toBeDropped.number -= num;
     }
+  }
+
+  sortInv() {
+    this._inv.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  print() {
+    let output = '';
+    this._inv.forEach(item => {
+      output += `${item.name}: ${item.number}\n`;
+    });
+    return output;
   }
 }
