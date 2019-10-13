@@ -39,4 +39,14 @@ export class Inventory {
     });
     return output;
   }
+
+  use(item) {
+    let toBeUsed = this._inv.find(inv => inv.name === item);
+    if (toBeUsed === undefined) throw "Tried to use item that wasn't in the inventory";
+    let callback = toBeUsed.useFunc;
+    this.drop(toBeUsed.name);
+    return (function() {
+      return callback(toBeUsed.args);
+    })();
+  }
 }

@@ -110,3 +110,23 @@ test('Inventory prints correctly', () => {
 
   expect(testObj.print()).toBe('Alpha: 1\nZeta: 2\n');
 });
+
+test('Can use item', () => {
+  let testObj = new Inventory();
+  let callBackTest = ([one, two]) => {
+    return `${one} ${two} Callback successful!`;
+  };
+  let testItem = {
+    name: 'Alpha',
+    useFunc: callBackTest,
+    args: [1, 2]
+  };
+
+  testObj.add(testItem);
+
+  expect(() => {
+    testObj.use();
+  }).toThrow();
+  expect(testObj.use('Alpha')).toBe('1 2 Callback successful!');
+  expect(testObj.inv).toStrictEqual([]);
+});
