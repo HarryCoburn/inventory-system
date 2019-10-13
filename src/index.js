@@ -7,7 +7,12 @@ export class Inventory {
     return this._inv;
   }
 
+  testItem(item) {
+    return item.hasOwnProperty('name');
+  }
+
   add(item, num = 1) {
+    if (this.testItem(item) === false) throw 'Tried to add malformed item to inventory';
     let alreadyExists = this._inv.find(inv => inv.name === item.name);
     if (alreadyExists === undefined) {
       item.number = num;
@@ -20,6 +25,7 @@ export class Inventory {
 
   drop(item, num = 1) {
     let toBeDropped = this._inv.find(inv => inv.name === item);
+    if (toBeDropped === undefined) throw 'Tried to discard item not in inventory!';
     if (toBeDropped.number <= num) {
       this._inv = this._inv.filter(inv => inv.name !== item);
       this.sortInv();

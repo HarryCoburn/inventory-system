@@ -130,3 +130,11 @@ test('Can use item', () => {
   expect(testObj.use('Alpha')).toBe('1 2 Callback successful!');
   expect(testObj.inv).toStrictEqual([]);
 });
+
+test('Throws on bad item', () => {
+  let testObj = new Inventory();
+  let badObj = {};
+  expect(() => {
+    testObj.add(badObj);
+  }).toThrow();
+});
